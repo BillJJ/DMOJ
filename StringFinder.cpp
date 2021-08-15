@@ -11,27 +11,15 @@ string s, t;
 int main(){
     ios_base::sync_with_stdio(0); cin.tie(NULL);
 
-    cin >> s >> t;
+    vector<int> a = {1,3}, b = {2,4};
 
-    ll t_hash = 0;
-    ll roll = 0;
-    ll pw = 1;
-    for(int i = 0; i < t.size(); i++){
-        t_hash = (t_hash*prime + t[i]) % mod;
-        roll = (roll * prime + s[i]) % mod;
-        pw = (pw * prime) % mod;
+    a.insert(a.end(), b.begin(), b.end());
+    sort(a.begin(), a.end());
+    if(a.size() & 1){
+        cout << a[a.size()/2];
+    } else{
+        cout << (double)(a[a.size()/2-1] + a[a.size()/2]) / 2;
     }
-    if(roll == t_hash){
-        cout << 0; return 0;
-    }
-    for(int i =t.size(); i < s.size(); i++){
-        roll = (roll*prime + s[i]) % mod;
-        roll = (roll - s[i-t.size()]*pw%mod + mod) % mod;
-        if(roll == t_hash){
-            cout << i-t.size()+1; return 0;
-        }
-    }
-    cout << -1;
 
     return 0;
 }
